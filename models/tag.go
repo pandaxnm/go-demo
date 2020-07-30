@@ -43,6 +43,23 @@ func ExistTagNameByName(name string) bool {
 	return false
 }
 
+func ExistTagById(id int) bool {
+	var tag Tag
+	db.Select("id").Where("id=?", id).First(&tag)
+
+	return tag.ID > 0
+}
+
+func EditTag(id int, data interface{}) bool {
+	db.Model(&Tag{}).Where("id=?", id).Updates(data)
+	return true
+}
+
+func DeleteTag(id int) bool {
+	db.Where("id=?", id).Delete(&Tag{})
+	return true
+}
+
 func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {
 	scope.SetColumn("CreatedOn", time.Now().Unix())
 	return nil

@@ -2,8 +2,8 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	v1 "github.com/pandaxnm/go-gin-example/controllers/v1"
 	"github.com/pandaxnm/go-gin-example/pkg/setting"
-	v1 "github.com/pandaxnm/go-gin-example/routers/api/v1"
 )
 
 func InitRouter() *gin.Engine {
@@ -13,12 +13,12 @@ func InitRouter() *gin.Engine {
 
 	gin.SetMode(setting.RunMode)
 
-	apiv1 := r.Group("/api/v1")
+	tag := r.Group("/v1")
 	{
-		apiv1.GET("/tags", v1.GetTags)
-		apiv1.POST("/tags", v1.AddTag)
-		apiv1.PUT("/tags/:id", v1.EditTag)
-		apiv1.DELETE("/tags/:id", v1.DeleteTag)
+		tag.GET("/tags", v1.GetTags)
+		tag.POST("/tags", v1.AddTag)
+		tag.PUT("/tags/:id", v1.EditTag)
+		tag.DELETE("/tags/:id", v1.DeleteTag)
 	}
 
 	return r
