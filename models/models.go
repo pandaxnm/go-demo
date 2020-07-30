@@ -5,6 +5,8 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/pandaxnm/go-gin-example/pkg/setting"
 	"log"
+
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var db *gorm.DB
@@ -52,6 +54,6 @@ func init() {
 	db.DB().SetMaxOpenConns(100)
 }
 
-func close() {
+func CloseDB() {
 	defer db.Close()
 }
